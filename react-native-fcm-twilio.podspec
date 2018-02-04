@@ -5,11 +5,11 @@ Pod::Spec.new do |s|
   s.name          = package['name']
   s.version       = package['version']
   s.summary       = package['description']
-  s.author        = "Libin Lu"
+  s.author        = "Tuan Dinh"
   s.license       = package['license']
   s.requires_arc  = true
-  s.homepage      = "https://github.com/evollu/react-native-fcm"
-  s.source        = { :git => 'https://github.com/evollu/react-native-fcm.git' }
+  s.homepage      = "https://github.com/leonacky/react-native-fcm-twilio"
+  s.source        = { :git => 'https://github.com/leonacky/react-native-fcm-twilio.git' }
   s.platform      = :ios, '8.0'
   s.source_files  = "ios/*.{h,m}"
   s.public_header_files = ['ios/RNFIRMessaging.h']

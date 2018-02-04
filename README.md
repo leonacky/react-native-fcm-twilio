@@ -2,20 +2,20 @@
 
 ## NOTES:
 - current latest version: v10.x
-- for iOS SDK < 4, use react-native-fcm@6.2.3 (v6.x is still compatible with Firebase SDK v4)
-- for RN < 0.40.0, use react-native-fcm@2.5.6
-- for RN < 0.33.0, use react-native-fcm@1.1.0
-- for RN < 0.30.0, use react-native-fcm@1.0.15
+- for iOS SDK < 4, use react-native-fcm-twilio@6.2.3 (v6.x is still compatible with Firebase SDK v4)
+- for RN < 0.40.0, use react-native-fcm-twilio@2.5.6
+- for RN < 0.33.0, use react-native-fcm-twilio@1.1.0
+- for RN < 0.30.0, use react-native-fcm-twilio@1.0.15
 - local notification is not only available in V1
 
-- An example working project is available at: https://github.com/evollu/react-native-fcm/tree/master/Examples/simple-fcm-client
+- An example working project is available at: https://github.com/leonacky/react-native-fcm-twilio/tree/master/Examples/simple-fcm-client
 
 - DO NOT change Android targetSdkVersion >= 26. The notification won't show up because of notification channel requirement.
-If you have to upgrade, you can use sdk-26 branch and post feedback on [here](https://github.com/evollu/react-native-fcm/pull/699)
+If you have to upgrade, you can use sdk-26 branch and post feedback on [here](https://github.com/leonacky/react-native-fcm-twilio/pull/699)
 
 ## Installation
 
-- Run `npm install react-native-fcm --save`
+- Run `npm install react-native-fcm-twilio --save`
 - [Link libraries](https://facebook.github.io/react-native/docs/linking-libraries-ios.html)
   Note: the auto link doesn't work with xcworkspace so CocoaPods user needs to do manual linking
 
@@ -33,7 +33,7 @@ https://firebase.google.com/docs/cloud-messaging/ios/certs
 
 - As `react-native link` sometimes has glitches, make sure you have this line added
 
-https://github.com/evollu/react-native-fcm/blob/master/Examples/simple-fcm-client/android/app/src/main/java/com/google/firebase/quickstart/fcm/MainApplication.java#L28
+https://github.com/leonacky/react-native-fcm-twilio/blob/master/Examples/simple-fcm-client/android/app/src/main/java/com/google/firebase/quickstart/fcm/MainApplication.java#L28
 
 - Edit `android/build.gradle`:
 ```diff
@@ -58,13 +58,13 @@ https://github.com/evollu/react-native-fcm/blob/master/Examples/simple-fcm-clien
 
 +    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_notif"/>
 
-+   <service android:name="com.evollu.react.fcm.MessagingService" android:enabled="true" android:exported="true">
++   <service android:name="com.aotasoft.fcm.twilio.MessagingService" android:enabled="true" android:exported="true">
 +     <intent-filter>
 +       <action android:name="com.google.firebase.MESSAGING_EVENT"/>
 +     </intent-filter>
 +   </service>
 
-+   <service android:name="com.evollu.react.fcm.InstanceIdService" android:exported="false">
++   <service android:name="com.aotasoft.fcm.twilio.InstanceIdService" android:exported="false">
 +     <intent-filter>
 +       <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
 +     </intent-filter>
@@ -116,7 +116,7 @@ Notes:
 - you if want to handle `click_action` you need to add custom intent-filter, check native android documentation
 
 
-If you are using RN < 0.30.0 and react-native-fcm < 1.0.16, pass intent into package, edit `MainActivity.java`:
+If you are using RN < 0.30.0 and react-native-fcm-twilio < 1.0.16, pass intent into package, edit `MainActivity.java`:
 
 - RN 0.28:
 
@@ -138,7 +138,7 @@ NOTE: Verify that react-native links correctly in `MainApplication.java`
 ```diff
 import android.app.application
 ...
-+import com.evollu.react.fcm.FIRMessagingPackage;
++import com.aotasoft.fcm.twilio.FIRMessagingPackage;
 ```
 ....
 ```diff
@@ -279,8 +279,8 @@ Edit AndroidManifest.xml
 + <uses-permission android:name="android.permission.VIBRATE" />
 
   <application
-+      <receiver android:name="com.evollu.react.fcm.FIRLocalMessagingPublisher"/>
-+      <receiver android:enabled="true" android:exported="true"  android:name="com.evollu.react.fcm.FIRSystemBootEventReceiver">
++      <receiver android:name="com.aotasoft.fcm.twilio.FIRLocalMessagingPublisher"/>
++      <receiver android:enabled="true" android:exported="true"  android:name="com.aotasoft.fcm.twilio.FIRSystemBootEventReceiver">
 +          <intent-filter>
 +              <action android:name="android.intent.action.BOOT_COMPLETED"/>
 +              <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
@@ -290,7 +290,7 @@ Edit AndroidManifest.xml
 +      </receiver>
   </application>
 ```
-NOTE: `com.evollu.react.fcm.FIRLocalMessagingPublisher` is required for presenting local notifications. `com.evollu.react.fcm.FIRSystemBootEventReceiver` is required only if you need to schedule future or recurring local notifications
+NOTE: `com.aotasoft.fcm.twilio.FIRLocalMessagingPublisher` is required for presenting local notifications. `com.aotasoft.fcm.twilio.FIRSystemBootEventReceiver` is required only if you need to schedule future or recurring local notifications
 
 
 ## Usage
@@ -333,22 +333,22 @@ FCM.on(FCMEvent.RefreshToken, (token) => {
     console.log(token)
     // fcm token may not be available on first load, catch it here
 });
-        
+
 class App extends Component {
     componentDidMount() {
         // iOS: show permission prompt for the first call. later just check permission in user settings
         // Android: check permission in user settings
         FCM.requestPermissions().then(()=>console.log('granted')).catch(()=>console.log('notification permission rejected'));
-        
+
         FCM.getFCMToken().then(token => {
             console.log(token)
             // store fcm token in your server
         });
-        
+
         this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
             // optional, do some component related stuff
         });
-        
+
         // initial notification contains the notification that launchs the app. If user launchs app by clicking banner, the banner notification info will be here rather than through FCM.on event
         // sometimes Android kills activity when app goes to background, and when resume it broadcasts notification before JS is run. You can use FCM.getInitialNotification() to capture those missed events.
         // initial notification will be triggered all the time even when open app by icon so send some action identifier when you send notification
@@ -611,7 +611,7 @@ check out [official docs and see if they support](https://firebase.google.com/do
 #### I want to add advanced feature that FCM doesn't support for remote notification
 You can either wait for FCM to develop it or you have to write native code to create notifications.
 - for iOS, you can do it in `didReceiveRemoteNotification` in `appDelegate.m`
-- for android, you can do it by implementing a service similar to "com.evollu.react.fcm.MessagingService"
+- for android, you can do it by implementing a service similar to "com.aotasoft.fcm.twilio.MessagingService"
 
 Or if you have a good way to wake up react native javascript thread please let me know, although I'm worring waking up the whole application is too expensive.
 
@@ -635,7 +635,7 @@ NOTE: this flag doesn't work for Android push notification, use `custom_notifica
 No. Method swizzling in Firebase Cloud Messaging handles this unless you turn that off. Then you are on your own to implement the handling. Check this link https://firebase.google.com/docs/cloud-messaging/ios/client
 
 #### I want to add actions in iOS notification
-Check this https://github.com/evollu/react-native-fcm/issues/325
+Check this https://github.com/leonacky/react-native-fcm-twilio/issues/325
 
 #### React/RCTBridgeModule.h not found
 This is mostly caused by React Native upgrade. Here is a fix http://stackoverflow.com/questions/41477241/react-native-xcode-upgrade-and-now-rctconvert-h-not-found

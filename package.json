@@ -1,28 +1,30 @@
 {
   "author": {
-    "name": "Libin Lu"
+    "name": "Tuan Dinh"
   },
   "bugs": {
-    "url": "https://github.com/evollu/react-native-fcm/issues"
+    "url": "https://github.com/leonacky/react-native-fcm-twilio/issues"
   },
-  "description": "React Native bridge for firebase cloud messaging (FCM)",
+  "description": "Merge react-native-fcm and twilio voice,
   "peerDependencies": {
     "react-native": ">=0.40.0"
   },
-  "homepage": "https://github.com/evollu/react-native-fcm",
+  "homepage": "https://github.com/leonacky/react-native-fcm-twilio",
   "keywords": [
     "React-Native",
     "ios",
     "android",
     "fcm",
     "firebase",
-    "cloud messaging"
+    "cloud messaging",
+    "twilio",
+    "twilio voice"
   ],
   "license": "MIT",
-  "name": "react-native-fcm",
+  "name": "react-native-fcm-twilio",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evollu/react-native-fcm.git"
+    "url": "git+https://github.com/leonacky/react-native-fcm-twilio.git"
   },
-  "version": "11.3.1"
+  "version": "1.0.0"
 }
