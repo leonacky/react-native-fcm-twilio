@@ -1,4 +1,4 @@
-RELEASE NOTE MOVED TO [Release Section](https://github.com/evollu/react-native-fcm/releases)
+RELEASE NOTE MOVED TO [Release Section](https://github.com/leonacky/react-native-fcm-twilio/releases)
 
 ### 1.0.13 BREAKING CHANGES
 - get initial intent inside module, support rn 0.29.0 (for people upgrading from older version, change `new FIRMessagingPackage(getIntent())` back to `new FIRMessagingPackage()`)
@@ -15,5 +15,5 @@ DON'T USE
 
 ### 1.0.9
 - added FCM.on support
-- returns string token instead of object for FCM.on('refreshToken') event 
+- returns string token instead of object for FCM.on('refreshToken') event
 - added support for subscribe/unsubscribe topic feature

@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/leonacky/react-native-fcm-twilio/issues"
   },
-  "description": "Merge react-native-fcm and twilio voice,
+  "description": "Merge react-native-fcm and twilio voice",
   "peerDependencies": {
     "react-native": ">=0.40.0"
   },
