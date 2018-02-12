@@ -1,6 +1,6 @@
 //Credits to react-native-push-notification
 
-package com.evollu.react.fcm;
+package com.aotasoft.react.fcm;
 
 import android.app.AlarmManager;
 import android.app.Application;

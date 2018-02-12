@@ -1,4 +1,5 @@
 import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+import Twilio from './twilio';
 
 const EventEmitter = new NativeEventEmitter(NativeModules.RNFIRMessaging || {});
 
@@ -173,5 +174,7 @@ FCM.unsubscribeFromTopic = (topic) => {
 FCM.send = (senderId, payload) => {
   RNFIRMessaging.send(senderId, payload);
 };
+
+export Twilio;
 
 export default FCM;

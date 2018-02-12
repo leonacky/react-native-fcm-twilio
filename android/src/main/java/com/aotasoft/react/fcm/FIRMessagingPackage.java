@@ -1,5 +1,6 @@
-package com.evollu.react.fcm;
+package com.aotasoft.react.fcm;
 
+import com.aotasoft.react.fcm.FIRMessagingModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;

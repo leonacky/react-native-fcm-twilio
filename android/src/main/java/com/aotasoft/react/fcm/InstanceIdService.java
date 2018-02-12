@@ -1,12 +1,12 @@
-package com.evollu.react.fcm;
+package com.aotasoft.react.fcm;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class InstanceIdService extends FirebaseInstanceIdService {
 
@@ -26,7 +26,7 @@ public class InstanceIdService extends FirebaseInstanceIdService {
 
         // Broadcast refreshed token
 
-        Intent i = new Intent("com.evollu.react.fcm.FCMRefreshToken");
+        Intent i = new Intent("com.aotasoft.react.fcm.FCMRefreshToken");
         Bundle bundle = new Bundle();
         bundle.putString("token", refreshedToken);
         i.putExtras(bundle);

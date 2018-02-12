@@ -1,14 +1,33 @@
 {
+  "_from": "git+https://github.com/leonacky/react-native-fcm-twilio.git",
+  "_id": "react-native-fcm-twilio@1.0.0",
+  "_inBundle": false,
+  "_location": "/react-native-fcm-twilio",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/leonacky/react-native-fcm-twilio",
+    "rawSpec": "https://github.com/leonacky/react-native-fcm-twilio",
+    "saveSpec": "git+https://github.com/leonacky/react-native-fcm-twilio.git",
+    "fetchSpec": "https://github.com/leonacky/react-native-fcm-twilio.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/leonacky/react-native-fcm-twilio.git#ba1881d2b5ea4a38029adc15f6338c84b14b30cb",
+  "_spec": "https://github.com/leonacky/react-native-fcm-twilio",
+  "_where": "/Users/leonacky/Data/dev/2018/novahub/slccoop",
   "author": {
     "name": "Tuan Dinh"
   },
   "bugs": {
     "url": "https://github.com/leonacky/react-native-fcm-twilio/issues"
   },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "Merge react-native-fcm and twilio voice",
-  "peerDependencies": {
-    "react-native": ">=0.40.0"
-  },
   "homepage": "https://github.com/leonacky/react-native-fcm-twilio",
   "keywords": [
     "React-Native",
@@ -22,6 +41,9 @@
   ],
   "license": "MIT",
   "name": "react-native-fcm-twilio",
+  "peerDependencies": {
+    "react-native": ">=0.40.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leonacky/react-native-fcm-twilio.git"

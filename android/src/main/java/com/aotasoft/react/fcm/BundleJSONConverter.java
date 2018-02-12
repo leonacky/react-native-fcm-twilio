@@ -20,7 +20,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.evollu.react.fcm;
+package com.aotasoft.react.fcm;
 
         import android.os.Bundle;
         import org.json.JSONArray;

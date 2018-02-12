@@ -1,4 +1,4 @@
-package com.evollu.react.fcm;
+package com.aotasoft.react.fcm;
 
 import android.content.Context;
 import android.content.SharedPreferences;

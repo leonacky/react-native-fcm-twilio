@@ -1,4 +1,4 @@
-declare module "react-native-fcm" {
+declare module "react-native-fcm-twilio" {
 
     type FCMEventType = "FCMTokenRefreshed" | "FCMNotificationReceived" | 'FCMDirectChannelConnectionChanged';
     export module FCMEvent {
