@@ -99,6 +99,7 @@ public class FIRMessagingModule extends ReactContextBaseJavaModule implements Li
 
     @ReactMethod
     public void presentLocalNotification(ReadableMap details) {
+        Log.e("presentLocalNotification","------------");
         Bundle bundle = Arguments.toBundle(details);
         mFIRLocalMessagingHelper.sendNotification(bundle);
     }

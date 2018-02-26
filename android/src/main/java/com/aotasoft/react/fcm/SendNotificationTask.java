@@ -1,6 +1,7 @@
 package com.aotasoft.react.fcm;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -49,7 +49,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             if (intentClassName == null) {
                 return null;
             }
-            
+
             if (bundle.getString("body") == null) {
                 return null;
             }
@@ -62,7 +62,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                 ApplicationInfo appInfo = mContext.getApplicationInfo();
                 title = mContext.getPackageManager().getApplicationLabel(appInfo).toString();
             }
-            
+
             NotificationCompat.Builder notification = new NotificationCompat.Builder(mContext)
             .setContentTitle(title)
             .setContentText(bundle.getString("body"))
@@ -84,6 +84,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             
             //priority
             String priority = bundle.getString("priority", "");
+
             switch(priority) {
                 case "min":
                     notification.setPriority(NotificationCompat.PRIORITY_MIN);
@@ -107,7 +108,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             if(smallIconResId != 0){
                 notification.setSmallIcon(smallIconResId);
             }
-            
+
             //large icon
             String largeIcon = bundle.getString("large_icon");
             if(largeIcon != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
@@ -123,7 +124,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                     }
                 }
             }
-            
+
             //big text
             String bigText = bundle.getString("big_text");
             if(bigText != null){
@@ -151,7 +152,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                 
                 notification.setStyle(bigPicture);
             }
-            
+
             //sound
             String soundName = bundle.getString("sound");
             if (soundName != null) {
@@ -194,7 +195,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
             
             if(bundle.containsKey("fire_date")) {
                 Log.d(TAG, "broadcast intent if it is a scheduled notification");
-                Intent i = new Intent("com.evollu.react.fcm.ReceiveLocalNotification");
+                Intent i = new Intent("com.aotasoft.react.fcm.ReceiveLocalNotification");
                 i.putExtras(bundle);
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(i);
             }
@@ -213,8 +214,13 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                 notification.setContentIntent(pendingIntent);
                 
                 Notification info = notification.build();
-                
-                NotificationManagerCompat.from(mContext).notify(notificationID, info);
+
+                NotificationManager mNotificationManager =
+                        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+//                NotificationManagerCompat.from(mContext).notify(notificationID, info);
+                mNotificationManager.notify(0, info);
             }
 
             if(bundle.getBoolean("wake_screen", false)){
@@ -232,6 +238,7 @@ public class SendNotificationTask extends AsyncTask<Void, Void, Void> {
                 editor.remove(bundle.getString("id"));
                 editor.apply();
             }
+            Log.e("doInBackground", "done");
         } catch (Exception e) {
             Log.e(TAG, "failed to send local notification", e);
         }
